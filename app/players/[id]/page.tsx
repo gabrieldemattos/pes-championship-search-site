@@ -7,13 +7,7 @@ import Hability from "./_components/hability";
 import Status from "./_components/status";
 import PlayerOwnerButton from "./_components/player-owner-button";
 
-interface PlayerPageProps {
-  params: {
-    id: string;
-  };
-}
-
-const PlayerPage = async ({ params }: PlayerPageProps) => {
+const PlayerPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
 
   const player = await db.players.findUnique({ where: { id: id } });
