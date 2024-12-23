@@ -7,14 +7,10 @@ import Hability from "./_components/hability";
 import Status from "./_components/status";
 import PlayerOwnerButton from "./_components/player-owner-button";
 
-interface PlayerPageProps {
-  params: {
-    id: string;
-  };
-}
+const PlayerPage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const id = (await params).id;
 
-const PlayerPage = async ({ params }: PlayerPageProps) => {
-  const player = await db.players.findUnique({ where: { id: params.id } });
+  const player = await db.players.findUnique({ where: { id: id } });
 
   const injuryTextColor = () => {
     if (player?.injuryTolerance === "A") return "text-red-500";
