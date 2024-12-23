@@ -4,7 +4,7 @@ import SearchPlayer from "./_components/search-player";
 export default function Home() {
   return (
     <div className="w-screen h-screen text-white flex flex-col pt-3">
-      <div className="relative h-[250px] w-full mt-10">
+      <div className="relative h-[250px] w-full mt-10 md:h-[350px]">
         <Image
           src="/pes-logo.png"
           alt="logo pro evolution soccer 2007"

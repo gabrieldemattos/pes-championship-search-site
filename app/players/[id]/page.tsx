@@ -27,7 +27,7 @@ const PlayerPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   if (!player) return notFound();
 
   return (
-    <div className="p-5">
+    <div className="p-5 md:px-16 lg:px-40 xl:px-80 2xl:px-96">
       <div className="mt-5 border pb-1">
         <div className="space-y-2">
           <h1 className="text-lg text-center border-b p-3 font-bold italic">

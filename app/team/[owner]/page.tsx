@@ -48,7 +48,7 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
   };
 
   return (
-    <div className="pb-5">
+    <div className="pb-5 md:px-10 lg:px-32 xl:px-60 2xl:px-96">
       {isLoading && (
         <h1 className="text-center text-xl mt-7">
           <Loader />
@@ -68,13 +68,16 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
             <span className="font-bold">{teamPlayers[0].playerOwner}</span>
           </h1>
 
-          <div className="px-5 mt-4 text-right mb-2">
-            <button onClick={handleClickGrid}>
-              {!isGrid ? <Grid2X2Icon /> : <Columns />}
-            </button>
-          </div>
+          <div
+            data-grid={isGrid}
+            className="py-2 px-5 lg:max-w-[70%] lg:mx-auto mt-4"
+          >
+            <div className="text-right mb-2">
+              <button onClick={handleClickGrid}>
+                {!isGrid ? <Grid2X2Icon /> : <Columns />}
+              </button>
+            </div>
 
-          <div className="py-2 px-5">
             <div
               data-grid={isGrid}
               className="flex flex-col border-2 gap-2 data-[grid=true]:grid data-[grid=true]:grid-cols-2 data-[grid=true]:border-none"

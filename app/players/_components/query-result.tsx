@@ -19,7 +19,7 @@ const QueryResult = ({
   error,
 }: PlayersProps) => {
   return (
-    <div className="pb-10 p-5">
+    <div className="pb-10 p-5 md:px-32 lg:px-60 xl:px-96">
       <div className="mt-8">
         <SearchPlayer isLoading={isLoading} />
       </div>
@@ -37,7 +37,7 @@ const QueryResult = ({
         {isLoading ? (
           <p className="text-white text-lg">Buscando jogador...</p>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-3 2xl:grid 2xl:grid-cols-2 items-center 2xl:space-y-0 2xl:gap-4">
             {players.map((player) => (
               <Button
                 key={player.id}
