@@ -9,6 +9,7 @@ import Link from "next/link";
 import { positionColors } from "../_constants/position-colors";
 import SearchPlayer from "../_components/search-player";
 import Navbar from "../_components/navbar";
+import ErrorMessage from "../_components/error-message";
 
 const PlayersPage = () => {
   const searchParams = useSearchParams();
@@ -77,7 +78,6 @@ const PlayersPage = () => {
                       {player.name} ({player.playerOwner})
                     </p>
                     <p
-                      data-color={player.mainPosition}
                       className={`uppercase border-b-2 ${
                         positionColors[player.mainPosition]
                       }`}
@@ -96,14 +96,7 @@ const PlayersPage = () => {
             </p>
           )}
 
-          {error !== "" && !isLoading && (
-            <div className="flex flex-col items-center mt-[200px] gap-5 font-bold">
-              <p className="text-8xl opacity-80">=(</p>
-              <p className="text-red-400 opacity-80 mt-10 text-center text-lg">
-                {error}
-              </p>
-            </div>
-          )}
+          {error !== "" && !isLoading && <ErrorMessage error={error} />}
         </div>
       </div>
     </div>
