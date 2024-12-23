@@ -11,6 +11,7 @@ model Players {
   id                String   @id @default(cuid())
   name              String
   playerOwner       String   @default("")
+  playerOwnerSlug   String   @default("")
   slug              String
   height            Float
   strongerFoot      String
