@@ -1,6 +1,5 @@
 "use client";
 
-import Navbar from "@/app/_components/navbar";
 import PlayerAccordingToPosition from "./_components/player-according-to-position";
 import { useEffect, useState } from "react";
 import { Players } from "@prisma/client";
@@ -50,8 +49,6 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
 
   return (
     <div className="pb-5">
-      <Navbar />
-
       {isLoading && (
         <h1 className="text-center text-xl mt-7">
           <Loader />
