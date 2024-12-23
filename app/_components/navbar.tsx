@@ -12,7 +12,7 @@ const Navbar = () => {
     router.back();
   };
   return (
-    <div className="flex items-center justify-between p-3 shadow-sm shadow-slate-500">
+    <div className="flex items-center justify-between p-3 shadow-md shadow-slate-500">
       <Button onClick={backToPreviousPage} variant="ghost">
         <ArrowLeft size={20} />
         <span className="font-semibold">Voltar</span>

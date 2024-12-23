@@ -13,18 +13,18 @@ interface SearchPlayerProps {
 const SearchPlayer = ({ isLoading }: SearchPlayerProps) => {
   const router = useRouter();
 
-  const [search, setSearch] = useState<string>("");
+  const [query, setQuery] = useState<string>("");
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+    setQuery(e.target.value);
   };
 
   const handleSearchSubmit = (e: ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!search) return;
+    if (!query || query.trim() === "") return;
 
-    router.push(`/players?search=${search}`);
+    router.push(`/players?search=${query.trim()}`);
   };
 
   return (
@@ -34,7 +34,7 @@ const SearchPlayer = ({ isLoading }: SearchPlayerProps) => {
           className="w-[300px] focus:border-2"
           onChange={handleSearch}
           placeholder="Digite o nome do jogador.."
-          value={search}
+          value={query}
         />
         <Button variant="secondary" disabled={isLoading}>
           Buscar <Search />

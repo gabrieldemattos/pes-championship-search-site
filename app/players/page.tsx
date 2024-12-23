@@ -17,6 +17,7 @@ const PlayersPage = () => {
 
   const [players, setPlayers] = useState<Players[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const fetchPlayers = async () => {
@@ -27,8 +28,12 @@ const PlayersPage = () => {
         const foundplayers = await searchPlayers(searchFor);
 
         setPlayers(foundplayers);
+        setError("");
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (error) {
-        console.log(error);
+        setError(
+          "Ocorreu um erro ao realizar a busca, retorne para o início e tente novamente."
+        );
         setPlayers([]);
       } finally {
         setIsLoading(false);
@@ -39,7 +44,7 @@ const PlayersPage = () => {
   }, [searchFor]);
 
   return (
-    <div>
+    <div className="pb-10">
       <Navbar />
 
       <div className="p-5">
@@ -64,11 +69,13 @@ const PlayersPage = () => {
               {players.map((player) => (
                 <Button
                   key={player.id}
-                  className="flex justify-between border text-lg p-2 font-semibold rounded bg-transparent"
+                  className="flex justify-between border text-base p-2 font-semibold rounded bg-transparent"
                   asChild
                 >
                   <Link href={`/players/${player.id}`}>
-                    <p className="capitalize">{player.name}</p>
+                    <p className="capitalize">
+                      {player.name} ({player.playerOwner})
+                    </p>
                     <p
                       data-color={player.mainPosition}
                       className={`uppercase border-b-2 ${
@@ -83,10 +90,19 @@ const PlayersPage = () => {
             </div>
           )}
 
-          {players.length === 0 && !isLoading && (
+          {players.length === 0 && !isLoading && error === "" && (
             <p className="text-white text-base opacity-80 mt-10">
-              Nenhum jogador encontrado..
+              Nenhum jogador encontrado com esse nome..
             </p>
+          )}
+
+          {error !== "" && !isLoading && (
+            <div className="flex flex-col items-center mt-[200px] gap-5 font-bold">
+              <p className="text-8xl opacity-80">=(</p>
+              <p className="text-red-400 opacity-80 mt-10 text-center text-lg">
+                {error}
+              </p>
+            </div>
           )}
         </div>
       </div>

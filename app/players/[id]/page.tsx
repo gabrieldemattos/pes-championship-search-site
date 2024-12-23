@@ -33,16 +33,18 @@ const PlayerPage = async ({ params }: PlayerPageProps) => {
   if (!player) return notFound();
 
   return (
-    <div>
+    <div className="pb-5">
       <Navbar />
 
       <div className="p-4 mt-5">
         <div className="border space-y-2">
-          <h1 className="text-lg text-center border-b p-3">
+          <h1 className="text-base text-center border-b p-3">
             Jogador: <span className="font-bold italic">{player.name}</span>
           </h1>
 
-          <Status status="Altura:" value={`${player.height}m`} />
+          <Status status="Dono:" value={player.playerOwner} />
+
+          <Status status="Altura:" value={`${player.height.toFixed(2)}m`} />
 
           <Status
             status="Pé:"
@@ -57,7 +59,7 @@ const PlayerPage = async ({ params }: PlayerPageProps) => {
             className={`${positionColors[player.mainPosition]}`}
           />
 
-          <p className="border-b py-1 px-2 text-lg">
+          <p className="border-b py-1 px-2 text-base">
             Posições:{" "}
             <span className="font-bold">
               {player.positions

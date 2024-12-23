@@ -22,5 +22,5 @@ export const searchPlayers = async (query: string) => {
     },
   });
 
-  return JSON.parse(JSON.stringify(players));
+  return players;
 };

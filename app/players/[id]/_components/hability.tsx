@@ -15,7 +15,7 @@ const Hability = ({ hability, value, conditionAndWeek }: HabilityProps) => {
   };
 
   return (
-    <p className="text-lg flex items-center justify-between capitalize">
+    <p className="text-base flex items-center justify-between capitalize">
       {hability}{" "}
       <span className={cn(`${valueColor()} font-semibold`, conditionAndWeek)}>
         {value}
