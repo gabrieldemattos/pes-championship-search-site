@@ -33,7 +33,7 @@ const PlayerButton = ({
                 {player.mainPosition}
               </p>
 
-              <p className="text-left pl-2 text-base font-semibold capitalize">
+              <p className="text-left pl-2 text-sm font-semibold capitalize sm:text-base">
                 {player.name}
               </p>
             </Link>

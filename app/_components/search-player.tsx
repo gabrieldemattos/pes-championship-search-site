@@ -31,7 +31,7 @@ const SearchPlayer = ({ isLoading }: SearchPlayerProps) => {
     <form onSubmit={handleSearchSubmit}>
       <div className="flex gap-3">
         <Input
-          className="w-[300px] focus:border-2"
+          className="w-[220px] focus:border-2 sm:w-[300px]"
           onChange={handleSearch}
           placeholder="Digite o nome do jogador.."
           value={query}

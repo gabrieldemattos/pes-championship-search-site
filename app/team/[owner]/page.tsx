@@ -63,7 +63,7 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
 
       {!isLoading && teamPlayers.length > 0 && !error && (
         <>
-          <h1 className="text-center text-xl mt-7">
+          <h1 className="text-center text-lg mt-7 sm:text-xl">
             Você está visualizando o time de{" "}
             <span className="font-bold">{teamPlayers[0].playerOwner}</span>
           </h1>
