@@ -41,7 +41,7 @@ const QueryResult = ({
             {players.map((player) => (
               <Button
                 key={player.id}
-                className="flex justify-between border text-base p-2 font-semibold rounded bg-transparent"
+                className="flex justify-between border border-[#515255] text-base p-2 font-semibold rounded-xl bg-transparent shadow shadow-slate-500"
                 asChild
               >
                 <Link href={`/players/${player.id}`}>

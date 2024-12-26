@@ -31,6 +31,10 @@ const Navbar = () => {
     return false;
   };
 
+  const orderedParticipants = participants.sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
+
   return (
     <nav className="flex items-center justify-between p-3 shadow-md shadow-slate-500">
       <Button
@@ -46,39 +50,41 @@ const Navbar = () => {
         <SheetTrigger>
           <MenuIcon />
         </SheetTrigger>
-        <SheetContent className="text-black w-[300px] overflow-y-auto">
+        <SheetContent className="text-white w-[300px] overflow-y-auto bg-[#141518] p-0 border-none">
           <SheetHeader>
-            <SheetTitle className="text-left">Menu</SheetTitle>
+            <SheetTitle className="text-left text-white px-5 pt-4 text-xl">
+              Menu
+            </SheetTitle>
 
-            <div className="pt-5 w-full">
-              <SheetClose
-                className="justify-start border py-2 px-4 rounded shadow-sm hover:bg-accent hover:text-accent-foreground"
-                asChild
-              >
-                <Link href="/" className="flex gap-2 text-sm w-full">
-                  <Home size={20} />
-                  <span className="font-semibold">Início</span>
+            <div className="py-2">
+              <Separator />
+            </div>
+
+            <div className="pt-5 w-full px-4">
+              <SheetClose asChild>
+                <Link
+                  href="/"
+                  className="flex gap-2 text-sm w-full bg-[#26272B] hover:bg-[#1E1F22] transition-all justify-start py-2 px-4 rounded-xl items-center shadow-sm"
+                >
+                  <Home size={16} />
+                  <span className="font-bold">Início</span>
                 </Link>
               </SheetClose>
 
               <SheetDescription></SheetDescription>
 
-              <div className="py-4">
+              <div className="py-5">
                 <Separator />
               </div>
 
               <div className="space-y-3">
-                {participants.map((participant) => (
-                  <SheetClose
-                    className="justify-start border py-2 px-4 rounded shadow-sm hover:bg-accent hover:text-accent-foreground"
-                    asChild
-                    key={participant.slug}
-                  >
+                {orderedParticipants.map((participant) => (
+                  <SheetClose asChild key={participant.slug}>
                     <Link
                       href={`/team/${participant.slug}`}
-                      className="flex gap-2 text-sm w-full"
+                      className="flex gap-2 text-sm w-full border border-[#26272B] hover:bg-[#26272B] transition-all justify-start py-2 px-4 rounded-xl items-center shadow-sm"
                     >
-                      <Flag size={20} />
+                      <Flag size={16} />
                       <span className="font-semibold">{participant.name}</span>
                     </Link>
                   </SheetClose>
