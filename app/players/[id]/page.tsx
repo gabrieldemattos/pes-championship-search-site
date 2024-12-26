@@ -44,7 +44,9 @@ const PlayerPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           <Status
             status="Pé:"
             value={`${player.strongerFoot} (${
-              player.strongerFoot === "left" ? "canhoto" : "destro"
+              player.strongerFoot.toLowerCase() === "left"
+                ? "canhoto"
+                : "destro"
             })`}
           />
 
