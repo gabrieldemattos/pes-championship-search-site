@@ -77,7 +77,7 @@ const Navbar = () => {
                 <Separator />
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-3 pb-4">
                 {orderedParticipants.map((participant) => (
                   <SheetClose asChild key={participant.slug}>
                     <Link

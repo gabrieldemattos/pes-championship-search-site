@@ -19,7 +19,7 @@ const PlayerAccordingToPosition = ({
     <div>
       <h2
         className={cn(
-          "uppercase text-center text-lg font-bold border-b-8 p-1 bg-gray-600 bg-opacity-80",
+          "uppercase text-center text-lg font-bold border-b-8 p-1 bg-gray-600 bg-opacity-80 rounded-lg",
           className
         )}
       >

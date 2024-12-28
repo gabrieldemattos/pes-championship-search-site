@@ -165,9 +165,9 @@ const PlayerPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </div>
         </div>
 
-        <div className="mt-4 grid grid-cols-2 px-5 gap-x-10 gap-y-1">
+        <div className="mt-4 grid grid-cols-2 px-5 gap-x-2 gap-y-2">
           {player.stars.map((star) => (
-            <div key={star} className="flex items-center gap-2 w-fit">
+            <div key={star} className="flex items-center gap-2 w-full">
               <Star className="fill-yellow-500 text-yellow-500 min-w-4 max-w-4" />
               <p className="capitalize">{star}</p>
             </div>

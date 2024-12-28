@@ -80,7 +80,7 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
 
             <div
               data-grid={isGrid}
-              className="flex flex-col border-2 gap-2 data-[grid=true]:grid data-[grid=true]:grid-cols-2 data-[grid=true]:border-none"
+              className="flex flex-col rounded-lg gap-2 data-[grid=true]:grid data-[grid=true]:grid-cols-2 data-[grid=true]:border-none"
             >
               <PlayerAccordingToPosition
                 position="Ataque"
