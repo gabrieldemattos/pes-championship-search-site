@@ -21,7 +21,7 @@ const PlayerButton = ({
           playerPositions.includes(player.mainPosition) && (
             <Link
               key={player.id}
-              href={`/players/${player.id}`}
+              href={`/player/${player.id}`}
               className="border-b p-1 flex items-center gap-1 hover:bg-slate-800"
             >
               <p

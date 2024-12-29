@@ -44,7 +44,7 @@ const QueryResult = ({
                 className="flex justify-between border border-[#515255] text-base p-2 font-semibold rounded-xl bg-transparent shadow shadow-slate-500"
                 asChild
               >
-                <Link href={`/players/${player.id}`}>
+                <Link href={`/player/${player.id}`}>
                   <p className="capitalize">
                     {player.name} ({player.playerOwner})
                   </p>
