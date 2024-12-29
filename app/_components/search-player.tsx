@@ -24,23 +24,29 @@ const SearchPlayer = ({ isLoading }: SearchPlayerProps) => {
 
     if (!query || query.trim() === "") return;
 
-    router.push(`/players?search=${query.trim()}`);
+    router.push(`/search/players?search=${query.trim()}`);
   };
 
   return (
-    <form onSubmit={handleSearchSubmit}>
-      <div className="flex gap-3">
-        <Input
-          className="w-[220px] focus:border-2 border-[#515255] sm:w-[300px] focus:shadow-md focus:shadow-[#515255]"
-          onChange={handleSearch}
-          placeholder="Digite o nome do jogador.."
-          value={query}
-        />
-        <Button variant="secondary" disabled={isLoading} className="font-bold">
-          Buscar <Search />
-        </Button>
-      </div>
-    </form>
+    <div className="space-y-8">
+      <form onSubmit={handleSearchSubmit}>
+        <div className="flex gap-3">
+          <Input
+            className="w-[220px] focus:border-2 border-[#515255] sm:w-[300px] focus:shadow-md focus:shadow-[#515255]"
+            onChange={handleSearch}
+            placeholder="Digite o nome do jogador.."
+            value={query}
+          />
+          <Button
+            variant="default"
+            disabled={isLoading}
+            className="font-bold flex items-center justify-center gap-2 px-4 py-2 bg-[#495057] text-white rounded-md hover:bg-[#343a40] focus:ring-2 focus:ring-gray-500 focus:outline-none disabled:bg-gray-500"
+          >
+            Buscar <Search />
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 
