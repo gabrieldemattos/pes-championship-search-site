@@ -124,7 +124,7 @@ const AdvancedSearch = () => {
       queryParams.append("stars", selectedStars.join(","));
     }
 
-    if (height.min !== undefined && height.max !== undefined) {
+    if (height.min !== undefined || height.max !== undefined) {
       queryParams.append("height", JSON.stringify(height));
     }
 
@@ -157,7 +157,8 @@ const AdvancedSearch = () => {
         <span className="underline uppercase">
           O valor máximo nunca pode ser menor que o valor mínimo
         </span>
-        , caso contrário, não encontrará nenhum jogador.
+        , caso contrário, não encontrará nenhum jogador. Caso coloque pontos ou
+        letras, também não encontrará jogador.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 md:grid-flow-col md:grid-rows-17 gap-3 lg:grid-cols-3">
@@ -182,7 +183,7 @@ const AdvancedSearch = () => {
 
         <FilterRange
           status="height"
-          label="Altura"
+          label="Altura (cm)"
           onRangeChange={handleHeight}
           onClearFilter={() => clearFilter("height")}
           isHeight={true}
