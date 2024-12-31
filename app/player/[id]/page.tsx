@@ -100,7 +100,7 @@ const PlayerPage = async ({ params }: { params: Promise<{ id: string }> }) => {
         <div className="p-2 flex justify-between space-x-3">
           <div className="w-full">
             <Hability hability="attack" value={player.attack} />
-            <Hability hability="defence" value={player.defense} />
+            <Hability hability="defense" value={player.defense} />
             <Hability hability="body balance" value={player.balance} />
             <Hability hability="stamina" value={player.stamina} />
             <Hability hability="top speed" value={player.topSpeed} />
