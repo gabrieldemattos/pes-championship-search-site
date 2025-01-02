@@ -107,7 +107,6 @@ const AdvancedSearch = () => {
       return alert("Nenhum filtro selecionado!");
     }
 
-    // Montando a query string
     const queryParams = new URLSearchParams();
 
     if (Object.keys(filters).length > 0) {
@@ -132,7 +131,6 @@ const AdvancedSearch = () => {
       queryParams.append("foot", foot);
     }
 
-    // Redirecionando para a página com os filtros aplicados
     router.push(`/search/advanced-search/results?${queryParams.toString()}`);
   };
 
