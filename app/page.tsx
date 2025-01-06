@@ -17,7 +17,7 @@ export default function Home() {
         </Link>
       </div>
 
-      <div className="w-screen text-white flex flex-col pt-3 relative top-0 left-0 translate-y-[15%] md:translate-y-[10%] lg:translate-y-[5%]">
+      <div className="w-screen text-white flex flex-col relative pt-3 top-0 left-0 translate-y-[0%] md:translate-y-[10%] lg:translate-y-[5%]">
         <div className="relative h-[250px] w-full md:h-[350px]">
           <Image
             src="/pes-logo.png"
