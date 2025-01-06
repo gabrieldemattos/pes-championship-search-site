@@ -9,6 +9,15 @@ export default {
   ],
   theme: {
     extend: {
+      keyframes: {
+        swingDown: {
+          "0%": { transform: "translateY(-120%)" }, // Começa escondido acima do menu
+          "100%": { transform: "translateY(0)" }, // Termina na posição final
+        },
+      },
+      animation: {
+        swingDown: "swingDown 1s ease-out forwards", // Nome, duração, easing e modo de execução
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -61,5 +70,6 @@ export default {
       },
     },
   },
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;

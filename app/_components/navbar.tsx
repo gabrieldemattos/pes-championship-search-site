@@ -36,7 +36,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="flex items-center justify-between p-3 shadow-md shadow-slate-500">
+    <nav className="flex items-center justify-between p-3 shadow-md shadow-slate-500 bg-[#212529] z-20">
       <Button
         onClick={backToPreviousPage}
         variant="ghost"
