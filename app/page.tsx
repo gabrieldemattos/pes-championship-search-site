@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      <div className="relative h-[200px] w-full animate-swingDown z-10">
+      <div className="h-[200px] w-full animate-swingDown z-10 relative">
         <Link href="/regulation">
           <Image
             src="/regulation-plate.png"

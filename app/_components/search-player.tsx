@@ -52,7 +52,7 @@ const SearchPlayer = ({ isLoading }: SearchPlayerProps) => {
         variant="default"
         disabled={isLoading}
         className="font-bold flex items-center justify-center gap-2 px-4 py-2 bg-[#495057] text-white rounded-md hover:bg-[#343a40] focus:ring-2 focus:ring-gray-500 
-        focus:outline-none disabled:bg-gray-500 w-full"
+        focus:outline-none disabled:bg-gray-500 w-full lg:w-[300px]"
         asChild
       >
         <Link href="/search/advanced-search">

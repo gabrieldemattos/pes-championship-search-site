@@ -24,20 +24,20 @@ const Navbar = () => {
     router.back();
   };
 
-  const checkIfIsHome = () => {
-    if (pathName === "/") {
-      return true;
-    }
-    return false;
-  };
+  const checkIfIsHome = () => (pathName === "/" ? true : false);
 
   const orderedParticipants = participants.sort((a, b) =>
     a.name.localeCompare(b.name)
   );
 
   return (
-    <nav className="flex items-center justify-between p-3 shadow-md shadow-slate-500 bg-[#212529] z-20">
+    <nav
+      data-ishome={checkIfIsHome()}
+      className="flex items-center p-3 shadow-md shadow-slate-500 bg-[#212529] z-20 data-[ishome=true]:justify-end data-[ishome=false]:justify-between"
+    >
       <Button
+        data-ishome={checkIfIsHome()}
+        className="data-[ishome=true]:hidden"
         onClick={backToPreviousPage}
         variant="ghost"
         disabled={checkIfIsHome()}
@@ -47,7 +47,7 @@ const Navbar = () => {
       </Button>
 
       <Sheet>
-        <SheetTrigger>
+        <SheetTrigger className="py-2">
           <MenuIcon />
         </SheetTrigger>
         <SheetContent className="text-white w-[300px] overflow-y-auto bg-[#141518] p-0 border-none">
