@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "./ui/button";
-import { ArrowLeft, Flag, Home, MenuIcon } from "lucide-react";
+import { ArrowLeft, Flag, Home, MenuIcon, Scroll, Trophy } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -60,7 +60,7 @@ const Navbar = () => {
               <Separator />
             </div>
 
-            <div className="pt-5 w-full px-4">
+            <div className="pt-5 w-full px-4 space-y-2">
               <SheetClose asChild>
                 <Link
                   href="/"
@@ -68,6 +68,26 @@ const Navbar = () => {
                 >
                   <Home size={16} />
                   <span className="font-bold">Início</span>
+                </Link>
+              </SheetClose>
+
+              <SheetClose asChild>
+                <Link
+                  href="/champions"
+                  className="flex gap-2 text-sm w-full bg-[#26272B] hover:bg-[#1E1F22] transition-all justify-start py-2 px-4 rounded-xl items-center shadow-sm"
+                >
+                  <Trophy size={16} />
+                  <span className="font-bold">Últimos Campeões</span>
+                </Link>
+              </SheetClose>
+
+              <SheetClose asChild>
+                <Link
+                  href="/regulation"
+                  className="flex gap-2 text-sm w-full bg-[#26272B] hover:bg-[#1E1F22] transition-all justify-start py-2 px-4 rounded-xl items-center shadow-sm"
+                >
+                  <Scroll size={16} />
+                  <span className="font-bold">Regulamento</span>
                 </Link>
               </SheetClose>
 
