@@ -7,7 +7,7 @@ import { Champion } from "@prisma/client";
 import { useEffect, useState } from "react";
 
 export default function ChampionsPage() {
-  const [allChampions, setAllChampions] = useState<Champion[]>([]);
+  const [allChampions, setAllChampions] = useState<Champion[] | null>(null);
 
   const fetchChampions = async () => {
     const fetchChampions = await champions();
@@ -101,7 +101,9 @@ export default function ChampionsPage() {
             </motion.div>
           ))
         ) : (
-          <p>Carregando...</p>
+          <h1 className="text-center text-2xl w-full font-bold mt-5 opacity-60 col-span-3">
+            Carregando...
+          </h1>
         )}
       </div>
     </main>
