@@ -51,3 +51,14 @@ model Players {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 }
+
+model Champion {
+  id                   String   @id @default(cuid())
+  playerOwner          String
+  season               String
+  finalScore           String 
+  highlightPlayerSlug  String
+  highlightPlayerImage String
+  teamPlayersSlugs     String[]
+  createdAt            DateTime @default(now())
+}
