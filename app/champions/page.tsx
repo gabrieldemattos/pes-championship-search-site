@@ -11,12 +11,14 @@ export default function ChampionsPage() {
 
   const fetchChampions = async () => {
     const fetchChampions = await champions();
-    setAllChampions(fetchChampions);
+    setAllChampions(fetchChampions.reverse());
   };
 
   useEffect(() => {
     fetchChampions();
   }, []);
+
+  console.log(allChampions);
 
   return (
     <main className="min-h-screen bg-gray-900 text-white p-8">
