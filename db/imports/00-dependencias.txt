@@ -1,0 +1,7 @@
+- pacotes necessários:
+pip install selenium psycopg2-binary beautifulsoup4
+
+- renomear o `imports/chromedriver.bak` para `imports/chromedriver.exe`
+
+- rodar o script:
+python .\db\imports\01-import-players.py
