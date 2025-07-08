@@ -5,3 +5,6 @@ pip install selenium psycopg2-binary beautifulsoup4
 
 - rodar o script:
 python .\db\imports\01-import-players.py
+
+- posteriormente, rodar o script para atualizar as posicoes e habilidades especiais dos jogadores ja contratados
+python .\db\imports\02-update-positions-stars-players.py

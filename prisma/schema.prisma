@@ -1,0 +1,64 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Players {
+  id                String   @id @default(cuid())
+  name              String
+  playerOwner       String   @default("")
+  playerOwnerSlug   String   @default("")
+  slug              String
+  height            Float
+  strongerFoot      String
+  mainPosition      String
+  positions         String[]
+  injuryTolerance   String
+  attack            Int
+  defense           Int
+  balance           Int
+  stamina           Int
+  topSpeed          Int
+  acceleration      Int
+  response          Int
+  agility           Int
+  dribbleAccuracy   Int
+  dribbleSpeed      Int
+  shortPassAccuracy Int
+  shortPassSpeed    Int
+  longPassAccuracy  Int
+  longPassSpeed     Int
+  shotAccuracy      Int
+  shotPower         Int
+  shotTechnique     Int
+  freeKickAccuracy  Int
+  swerve            Int
+  heading           Int
+  jump              Int
+  technique         Int
+  aggression        Int
+  mentality         Int
+  goalKeeperSkills  Int
+  teamwork          Int
+  conditionFitness  Int
+  weakFootAccuracy  Int
+  weakFootFrequency Int
+  stars             String[] @default([])
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+model Champion {
+  id                   String   @id @default(cuid())
+  playerOwner          String
+  season               String
+  finalScore           String 
+  highlightPlayerSlug  String
+  highlightPlayerImage String
+  teamPlayersSlugs     String[]
+  createdAt            DateTime @default(now())
+}

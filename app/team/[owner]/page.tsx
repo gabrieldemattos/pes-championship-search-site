@@ -40,7 +40,7 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
 
   const attackers = ["CF", "SS", "WF"];
   const midfielders = ["AMF", "SMF", "CMF", "WB", "DMF"];
-  const defenders = ["SB", "CB", "CWP"];
+  const defenders = ["SB", "CB", "CWP", "CBT"];
   const goalkeepers = ["GK"];
 
   const handleClickGrid = () => {
