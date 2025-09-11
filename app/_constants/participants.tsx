@@ -1,6 +1,6 @@
 export const participants = [
   { name: "Banana", slug: "banana" },
-  { name: "Mega Frango", slug: "mega-frango" },
+  { name: "Renato", slug: "renato" },
   { name: "Laelson", slug: "laelson" },
   { name: "Pires", slug: "pires" },
   { name: "Jarrão", slug: "jarrao" },
@@ -8,7 +8,7 @@ export const participants = [
   { name: "Léo", slug: "leo" },
   { name: "Andrey", slug: "andrey" },
   { name: "Otávio", slug: "otavio" },
-  { name: "Luciano", slug: "luciano" },
+  { name: "Juninho", slug: "juninho" },
   { name: "Neto", slug: "neto" },
   { name: "Lalo", slug: "lalo" },
   { name: "Kléber", slug: "kleber" },
