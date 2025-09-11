@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "./ui/button";
-import { ArrowLeft, Flag, Home, MenuIcon, Scroll, Trophy } from "lucide-react";
+import { ArrowLeft, Flag, Home, MenuIcon, Trophy } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -81,7 +81,7 @@ const Navbar = () => {
                 </Link>
               </SheetClose>
 
-              <SheetClose asChild>
+              {/* <SheetClose asChild>
                 <Link
                   href="/regulation"
                   className="flex gap-2 text-sm w-full bg-[#26272B] hover:bg-[#1E1F22] transition-all justify-start py-2 px-4 rounded-xl items-center shadow-sm"
@@ -89,7 +89,7 @@ const Navbar = () => {
                   <Scroll size={16} />
                   <span className="font-bold">Regulamento</span>
                 </Link>
-              </SheetClose>
+              </SheetClose> */}
 
               <SheetDescription></SheetDescription>
 

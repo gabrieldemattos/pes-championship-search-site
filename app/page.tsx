@@ -8,7 +8,7 @@ export default function Home() {
         <div className="relative h-[250px] w-full md:h-[350px]">
           <Image
             src="/pes-logo.png"
-            alt="logo pro evolution soccer 2007"
+            alt="logo pes"
             fill
             priority
             className="object-contain"
