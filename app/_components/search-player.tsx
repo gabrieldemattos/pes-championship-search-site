@@ -28,7 +28,7 @@ const SearchPlayer = ({ isLoading }: SearchPlayerProps) => {
   };
 
   return (
-    <div className="space-y-4">
+    <div>
       <form onSubmit={handleSearchSubmit}>
         <div className="flex gap-3">
           <Input

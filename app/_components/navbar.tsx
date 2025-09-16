@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <nav
       data-ishome={checkIfIsHome()}
-      className="flex items-center p-3 shadow-md shadow-slate-500 bg-[#212529] z-20 data-[ishome=true]:justify-end data-[ishome=false]:justify-between"
+      className="flex items-center p-3 shadow-md shadow-slate-600 bg-[#212529] z-20 data-[ishome=true]:justify-end data-[ishome=false]:justify-between"
     >
       <Button
         data-ishome={checkIfIsHome()}
