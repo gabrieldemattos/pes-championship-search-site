@@ -41,8 +41,8 @@ export const PlayerRow = ({ player }: { player: Players }) => {
     name: string;
     slug: string;
   } | null>(null);
-  const [state, formAction, isPending] = useActionState(editPlayer, null);
-  const [open, setOpen] = useState(false); // controla o modal
+  const [, formAction, isPending] = useActionState(editPlayer, null);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="border rounded-2xl text-left py-2 px-4 flex justify-between items-center">
