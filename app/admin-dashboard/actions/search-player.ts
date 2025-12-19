@@ -2,7 +2,7 @@
 
 import { db } from "@/app/_lib/prisma";
 
-export async function searchPlayers(_: unknown, queryData: FormData) {
+export async function searchPlayers(queryData: FormData) {
   const search = String(queryData.get("search"));
 
   if (!search) return [];

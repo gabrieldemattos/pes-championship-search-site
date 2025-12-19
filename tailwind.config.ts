@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["'Nunito'", "sans-serif"], // <- substitui font-sans padrão
+      },
       keyframes: {
         swingDown: {
           "0%": { transform: "translateY(-120%)" }, // Começa escondido acima do menu

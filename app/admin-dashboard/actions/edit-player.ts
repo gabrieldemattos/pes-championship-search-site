@@ -3,7 +3,7 @@
 import { db } from "@/app/_lib/prisma";
 import { revalidatePath } from "next/cache";
 
-export async function editPlayer(_: unknown, queryData: FormData) {
+export async function editPlayer(queryData: FormData) {
   const id = String(queryData.get("id"));
   const ownerName = String(queryData.get("owner-name"));
   const ownerSlug = String(queryData.get("owner-slug"));

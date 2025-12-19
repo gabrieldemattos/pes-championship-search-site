@@ -2,26 +2,38 @@
 
 import { Button } from "@/app/_components/ui/button";
 import { Input } from "@/app/_components/ui/input";
-import { useActionState } from "react";
+import { useState, useTransition } from "react";
 import { searchPlayers } from "../actions/search-player";
 import PlayersResults from "./players-results";
+import { Players } from "@prisma/client";
 
 const Form = () => {
-  const [result, handleSubmit, isLoading] = useActionState(searchPlayers, []);
+  const [result, setResult] = useState<Players[]>([]);
+  const [isPending, startTransition] = useTransition();
+
+  async function handleSubmit(formData: FormData) {
+    startTransition(async () => {
+      const res = await searchPlayers(formData);
+      setResult(res);
+    });
+  }
 
   return (
     <div className="flex flex-col w-full px-10">
       <form
-        action={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(new FormData(e.currentTarget));
+        }}
         className="w-full flex items-center justify-center gap-3"
       >
         <Input
-          disabled={isLoading}
+          disabled={isPending}
           name="search"
           placeholder="Busque pelo jogador.."
         />
 
-        <Button disabled={isLoading} type="submit" variant="secondary">
+        <Button disabled={isPending} type="submit" variant="secondary">
           Buscar
         </Button>
       </form>

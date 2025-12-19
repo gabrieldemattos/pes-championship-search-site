@@ -13,7 +13,7 @@ import {
 import { Input } from "@/app/_components/ui/input";
 import { Players } from "@prisma/client";
 import { Pencil } from "lucide-react";
-import { useActionState, useState } from "react";
+import { useState, useTransition } from "react";
 import { editPlayer } from "../actions/edit-player";
 import { participants } from "@/app/_constants/participants";
 import {
@@ -41,8 +41,24 @@ export const PlayerRow = ({ player }: { player: Players }) => {
     name: string;
     slug: string;
   } | null>(null);
-  const [, formAction, isPending] = useActionState(editPlayer, null);
+  const [isPending, startTransition] = useTransition();
   const [open, setOpen] = useState(false);
+
+  async function handleSubmit(formData: FormData) {
+    startTransition(async () => {
+      try {
+        await editPlayer(formData);
+        toast.success(`Jogador atualizado para ${formData.get("owner-name")}`, {
+          duration: 5000,
+          position: "bottom-center",
+        });
+        setOpen(false);
+      } catch (err) {
+        console.error(err);
+        toast.error("Erro ao atualizar o jogador");
+      }
+    });
+  }
 
   return (
     <div className="border rounded-2xl text-left py-2 px-4 flex justify-between items-center">
@@ -61,6 +77,7 @@ export const PlayerRow = ({ player }: { player: Players }) => {
             <Pencil size={16} />
           </Button>
         </DialogTrigger>
+
         <DialogContent className="w-[90%] sm:max-w-[425px] text-black">
           <DialogHeader>
             <DialogTitle>
@@ -76,21 +93,9 @@ export const PlayerRow = ({ player }: { player: Players }) => {
           </DialogHeader>
 
           <form
-            action={async (formData: FormData) => {
-              try {
-                await formAction(formData);
-                toast.success(
-                  `Jogador atualizado para ${formData.get("owner-name")}`,
-                  {
-                    duration: 5000,
-                    position: "bottom-center",
-                  }
-                );
-                setOpen(false);
-              } catch (err) {
-                console.error(err);
-                toast.error("Erro ao atualizar o jogador");
-              }
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit(new FormData(e.currentTarget));
             }}
           >
             <div className="space-y-8">
