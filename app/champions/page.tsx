@@ -5,6 +5,7 @@ import Image from "next/image";
 import { champions } from "./_actions/champions";
 import { Champion } from "@prisma/client";
 import { useEffect, useState } from "react";
+import Loader from "../_components/loader";
 
 export default function ChampionsPage() {
   const [allChampions, setAllChampions] = useState<Champion[] | null>(null);
@@ -103,9 +104,7 @@ export default function ChampionsPage() {
             </motion.div>
           ))
         ) : (
-          <h1 className="text-center text-2xl w-full font-bold mt-5 opacity-60 col-span-3">
-            Carregando...
-          </h1>
+          <Loader />
         )}
       </div>
     </main>

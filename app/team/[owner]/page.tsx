@@ -5,14 +5,16 @@ import { useEffect, useState } from "react";
 import { Players } from "@prisma/client";
 import { searchTeam } from "./_actions/search-team";
 import Loader from "@/app/_components/loader";
-import { Columns, Grid2X2Icon } from "lucide-react";
+import { ClipboardList, Columns, Grid2X2Icon } from "lucide-react";
 import ErrorMessage from "@/app/_components/error-message";
+import LineupBuilder from "./_components/lineup-builder";
 
 const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
   const [teamPlayers, setTeamPlayers] = useState<Players[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>("");
   const [isGrid, setIsGrid] = useState<boolean>(true);
+  const [step, setStep] = useState<number>(0);
 
   useEffect(() => {
     const fetchPlayers = async () => {
@@ -47,13 +49,20 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
     setIsGrid(!isGrid);
   };
 
+  const sortedPlayersList = [
+    ...teamPlayers.filter((player) => attackers.includes(player.mainPosition)),
+    ...teamPlayers.filter((player) =>
+      midfielders.includes(player.mainPosition)
+    ),
+    ...teamPlayers.filter((player) => defenders.includes(player.mainPosition)),
+    ...teamPlayers.filter((player) =>
+      goalkeepers.includes(player.mainPosition)
+    ),
+  ];
+
   return (
     <div className="pb-5 md:px-10 lg:px-32 xl:px-60 2xl:px-96">
-      {isLoading && (
-        <h1 className="text-center text-xl mt-7">
-          <Loader />
-        </h1>
-      )}
+      {isLoading && <Loader />}
 
       {error && (
         <div className="px-5">
@@ -61,7 +70,7 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
         </div>
       )}
 
-      {!isLoading && teamPlayers.length > 0 && !error && (
+      {!isLoading && teamPlayers.length > 0 && !error && step === 0 && (
         <>
           <h1 className="text-center text-lg mt-7 sm:text-xl">
             Você está visualizando o time de{" "}
@@ -70,9 +79,16 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
 
           <div
             data-grid={isGrid}
-            className="py-2 px-5 lg:max-w-[70%] lg:mx-auto mt-4"
+            className="py-2 px-5 lg:max-w-[70%] lg:mx-auto mt-4 space-y-4"
           >
-            <div className="text-right mb-2">
+            <div className="mb-2 flex items-center gap-3 justify-end">
+              <button
+                className="flex items-center gap-2"
+                onClick={() => setStep(1)}
+              >
+                <ClipboardList />
+              </button>
+
               <button onClick={handleClickGrid}>
                 {!isGrid ? <Grid2X2Icon /> : <Columns />}
               </button>
@@ -112,6 +128,10 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
             </div>
           </div>
         </>
+      )}
+
+      {!isLoading && teamPlayers.length > 0 && !error && step === 1 && (
+        <LineupBuilder playersList={sortedPlayersList} setStep={setStep} />
       )}
     </div>
   );

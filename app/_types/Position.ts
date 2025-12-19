@@ -1,0 +1,18 @@
+export type Position =
+  | "GK"
+  | "LB"
+  | "CB(1)"
+  | "CB(2)"
+  | "CB(3)"
+  | "RB"
+  | "DMF(1)"
+  | "DMF(2)"
+  | "AMF(1)"
+  | "AMF(2)"
+  | "LMF(1)"
+  | "CMF(1)"
+  | "RMF(1)"
+  | "CF(1)"
+  | "CF(2)"
+  | "RWF(1)"
+  | "LWF(1)";
