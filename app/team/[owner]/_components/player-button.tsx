@@ -1,5 +1,6 @@
 "use client";
 
+import { lineupPositionColors } from "@/app/_constants/position-colors";
 import { cn } from "@/app/_lib/utils";
 import { Players } from "@prisma/client";
 import Link from "next/link";
@@ -26,14 +27,16 @@ const PlayerButton = ({
             >
               <p
                 className={cn(
-                  "bg-white text-black border-b-4 h-fit rounded-md font-bold bg-opacity-90 w-12 text-center",
+                  `${
+                    lineupPositionColors[player.mainPosition]
+                  } border-b-4 h-fit rounded-md font-bold w-12 text-center`,
                   className
                 )}
               >
                 {player.mainPosition}
               </p>
 
-              <p className="text-left pl-2 text-sm font-semibold capitalize sm:text-base">
+              <p className="text-left pl-2 text-[13px] font-semibold capitalize sm:text-base">
                 {player.name}
               </p>
             </Link>
