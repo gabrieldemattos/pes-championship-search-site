@@ -1,13 +1,15 @@
-import { ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 
 const StatValue = ({
   value,
   win,
+  draw,
   side,
   sum,
 }: {
   value: number;
   win: boolean;
+  draw: boolean;
   side: "left" | "right";
   sum: number;
 }) => {
@@ -31,10 +33,12 @@ const StatValue = ({
 
             <span className="text-gray-400 text-xs">({sum})</span>
           </div>
-        ) : (
+        ) : !draw ? (
           <span className="text-red-500 absolute left-0">
-            <ArrowUp className="rotate-180" size={20} />
+            <ArrowDown size={20} />
           </span>
+        ) : (
+          <span className="bg-blue-500 absolute left-0 h-[2px] w-3" />
         ))}
 
       <span
@@ -54,10 +58,12 @@ const StatValue = ({
 
             <span className="text-gray-400 text-xs">({sum})</span>
           </div>
-        ) : (
+        ) : !draw ? (
           <span className="text-red-500 absolute right-0">
-            <ArrowUp className="rotate-180" size={20} />
+            <ArrowDown size={20} />
           </span>
+        ) : (
+          <span className="bg-blue-500 absolute right-0 h-[2px] w-3" />
         ))}
     </div>
   );

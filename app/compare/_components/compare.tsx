@@ -75,6 +75,7 @@ const Compare = ({ playerA, playerB }: CompareProps) => {
                     <StatValue
                       value={aValue as number}
                       win={aValue > bValue}
+                      draw={aValue === bValue}
                       side="left"
                       sum={Number(aValue) - Number(bValue)}
                     />
@@ -90,6 +91,7 @@ const Compare = ({ playerA, playerB }: CompareProps) => {
                     <StatValue
                       value={bValue as number}
                       win={bValue > aValue}
+                      draw={bValue === aValue}
                       side="right"
                       sum={Number(bValue) - Number(aValue)}
                     />
