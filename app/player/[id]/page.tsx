@@ -9,23 +9,15 @@ import { ReactElement } from "react";
 import Hability from "./_components/hability";
 import { Badge } from "@/app/_components/ui/badge";
 import Link from "next/link";
+import {
+  conditionAndWeekTextColor,
+  injuryTextColor,
+} from "@/app/_constants/status-color";
 
 const PlayerPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = (await params).id;
 
   const player = await db.players.findUnique({ where: { id: id } });
-
-  const injuryTextColor = () => {
-    if (player?.injuryTolerance === "A") return "text-red-500";
-    if (player?.injuryTolerance === "B") return "text-yellow-500";
-    return;
-  };
-
-  const conditionAndWeekTextColor = (value: number) => {
-    if (value === 7) return "text-orange-500";
-    if (value === 8) return "text-red-500";
-    return;
-  };
 
   if (!player) return notFound();
 
@@ -43,7 +35,7 @@ const PlayerPage = async ({ params }: { params: Promise<{ id: string }> }) => {
               </h1>
 
               <p
-                className={`text-base sm:text-base px-3 py-1 shrink-0 font-bold rounded-lg ${
+                className={`text-base px-3 py-1 shrink-0 font-bold rounded-lg ${
                   lineupPositionColors[player.mainPosition]
                 }`}
               >
@@ -207,7 +199,7 @@ const PlayerPage = async ({ params }: { params: Promise<{ id: string }> }) => {
 
                 <p className="text-lg flex items-center justify-between capitalize">
                   Injury{" "}
-                  <span className={`${injuryTextColor()} font-bold`}>
+                  <span className={`${injuryTextColor(player)} font-bold`}>
                     {player.injuryTolerance}
                   </span>
                 </p>

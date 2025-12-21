@@ -8,32 +8,30 @@ import Loader from "@/app/_components/loader";
 import { ClipboardList, Columns, Grid2X2Icon } from "lucide-react";
 import ErrorMessage from "@/app/_components/error-message";
 import LineupBuilder from "./_components/lineup-builder";
+import { Button } from "@/app/_components/ui/button";
+import CompareModal from "./_components/compare-modal";
+import { State } from "@/app/_types/State";
 
 const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
-  const [teamPlayers, setTeamPlayers] = useState<Players[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string>("");
+  const [playersList, setPlayersList] = useState<Players[]>([]);
+  const [state, setState] = useState<State>("idle");
   const [isGrid, setIsGrid] = useState<boolean>(true);
   const [step, setStep] = useState<number>(0);
+  const [openCompareModal, setOpenCompareModal] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchPlayers = async () => {
       if (!params) return;
 
-      setIsLoading(true);
+      setState("loading");
       try {
         const players = await searchTeam((await params).owner);
 
-        setTeamPlayers(players);
-        setError("");
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (error) {
-        setError(
-          "Ocorreu um erro ao realizar a busca, retorne para o início e tente novamente."
-        );
-        setTeamPlayers([]);
-      } finally {
-        setIsLoading(false);
+        setPlayersList(players);
+        setState("success");
+      } catch {
+        setState("error");
+        setPlayersList([]);
       }
     };
 
@@ -50,48 +48,57 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
   };
 
   const sortedPlayersList = [
-    ...teamPlayers.filter((player) => attackers.includes(player.mainPosition)),
-    ...teamPlayers.filter((player) =>
+    ...playersList.filter((player) => attackers.includes(player.mainPosition)),
+    ...playersList.filter((player) =>
       midfielders.includes(player.mainPosition)
     ),
-    ...teamPlayers.filter((player) => defenders.includes(player.mainPosition)),
-    ...teamPlayers.filter((player) =>
+    ...playersList.filter((player) => defenders.includes(player.mainPosition)),
+    ...playersList.filter((player) =>
       goalkeepers.includes(player.mainPosition)
     ),
   ];
 
   return (
     <div className="pb-5 md:px-10 lg:px-32 xl:px-60 2xl:px-96">
-      {isLoading && <Loader />}
+      {state === "loading" && <Loader />}
 
-      {error && (
+      {state === "error" && (
         <div className="px-5">
-          <ErrorMessage error={error} />
+          <ErrorMessage error="Ocorreu um erro ao realizar a busca, retorne para o início e tente novamente." />
         </div>
       )}
 
-      {!isLoading && teamPlayers.length > 0 && !error && step === 0 && (
+      {state === "success" && playersList.length > 0 && step === 0 && (
         <>
           <h1 className="text-center text-lg mt-7 sm:text-xl">
             Você está visualizando o time de{" "}
-            <span className="font-bold">{teamPlayers[0].playerOwner}</span>
+            <span className="font-bold">{playersList[0].playerOwner}</span>
           </h1>
 
           <div
             data-grid={isGrid}
             className="py-2 px-5 lg:max-w-[70%] lg:mx-auto mt-4 space-y-4"
           >
-            <div className="mb-2 flex items-center gap-3 justify-end">
-              <button
-                className="flex items-center gap-2"
-                onClick={() => setStep(1)}
+            <div className="flex items-center justify-between">
+              <Button
+                variant="secondary"
+                onClick={() => setOpenCompareModal(true)}
               >
-                <ClipboardList />
-              </button>
+                Comparar jogador
+              </Button>
 
-              <button onClick={handleClickGrid}>
-                {!isGrid ? <Grid2X2Icon /> : <Columns />}
-              </button>
+              <div className="mb-2 flex items-center gap-3 justify-end">
+                <button
+                  className="flex items-center gap-2"
+                  onClick={() => setStep(1)}
+                >
+                  <ClipboardList />
+                </button>
+
+                <button onClick={handleClickGrid}>
+                  {!isGrid ? <Grid2X2Icon /> : <Columns />}
+                </button>
+              </div>
             </div>
 
             <div
@@ -101,36 +108,43 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
               <PlayerAccordingToPosition
                 position="Ataque"
                 playerPositions={attackers}
-                players={teamPlayers}
+                players={playersList}
                 className="border-red-700"
               />
 
               <PlayerAccordingToPosition
                 position="Meio-Campo"
                 playerPositions={midfielders}
-                players={teamPlayers}
+                players={playersList}
                 className="border-green-700"
               />
 
               <PlayerAccordingToPosition
                 position="Defesa"
                 playerPositions={defenders}
-                players={teamPlayers}
+                players={playersList}
                 className="border-blue-700"
               />
 
               <PlayerAccordingToPosition
                 position="Goleiro"
                 playerPositions={goalkeepers}
-                players={teamPlayers}
+                players={playersList}
                 className="border-yellow-700"
               />
             </div>
           </div>
+
+          <CompareModal
+            open={openCompareModal}
+            setOpen={setOpenCompareModal}
+            playersList={sortedPlayersList}
+            team={playersList[0].playerOwner}
+          />
         </>
       )}
 
-      {!isLoading && teamPlayers.length > 0 && !error && step === 1 && (
+      {state === "loading" && playersList.length > 0 && step === 1 && (
         <LineupBuilder playersList={sortedPlayersList} setStep={setStep} />
       )}
     </div>

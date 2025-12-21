@@ -1,4 +1,6 @@
-export const status = [
+import { Status } from "../_types/Status";
+
+export const status: Status[] = [
   {
     status: "attack",
     label: "Attack",
