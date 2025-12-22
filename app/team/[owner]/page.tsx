@@ -144,7 +144,7 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
         </>
       )}
 
-      {state === "loading" && playersList.length > 0 && step === 1 && (
+      {state === "success" && playersList.length > 0 && step === 1 && (
         <LineupBuilder playersList={sortedPlayersList} setStep={setStep} />
       )}
     </div>
