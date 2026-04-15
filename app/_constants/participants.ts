@@ -7,7 +7,7 @@ export const participants = [
   { name: "Netico", slug: "netico" },
   { name: "Léo", slug: "leo" },
   { name: "Andrey", slug: "andrey" },
-  { name: "Otávio", slug: "otavio" },
+  { name: "Flaitt", slug: "flaitt" },
   { name: "Juninho", slug: "juninho" },
   { name: "Xande", slug: "xande" },
   { name: "Lalo", slug: "lalo" },
