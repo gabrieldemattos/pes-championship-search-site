@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "./ui/button";
-import { ArrowLeft, Flag, Home, MenuIcon, Trophy } from "lucide-react";
+import { ArrowLeft, BarChart2, Flag, Home, MenuIcon, Trophy } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -21,7 +21,11 @@ const Navbar = () => {
   const pathName = usePathname();
 
   const backToPreviousPage = () => {
-    router.back();
+    if (pathName === "/liga") {
+      router.push("/");
+    } else {
+      router.back();
+    }
   };
 
   const checkIfIsHome = () => (pathName === "/" ? true : false);
@@ -78,6 +82,16 @@ const Navbar = () => {
                 >
                   <Trophy size={16} />
                   <span className="font-bold">Últimos Campeões</span>
+                </Link>
+              </SheetClose>
+
+              <SheetClose asChild>
+                <Link
+                  href="/liga"
+                  className="flex gap-2 text-sm w-full bg-[#26272B] hover:bg-[#1E1F22] transition-all justify-start py-2 px-4 rounded-xl items-center shadow-sm"
+                >
+                  <BarChart2 size={16} />
+                  <span className="font-bold">Liga</span>
                 </Link>
               </SheetClose>
 
