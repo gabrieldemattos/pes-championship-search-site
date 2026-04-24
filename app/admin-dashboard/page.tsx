@@ -27,7 +27,7 @@ const AdminDashboard = () => {
       } else {
         alert("Senha incorreta.");
       }
-    } catch (error) {
+    } catch {
       alert("Erro ao validar acesso. Tente novamente.");
     }
   };
