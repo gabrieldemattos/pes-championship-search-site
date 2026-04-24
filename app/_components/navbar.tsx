@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "./ui/button";
-import { ArrowLeft, BarChart2, Flag, Home, MenuIcon, Trophy } from "lucide-react";
+import { ArrowLeft, BarChart2, Crown, Flag, Home, MenuIcon, Trophy } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -15,6 +15,8 @@ import {
 } from "./ui/sheet";
 import { participants } from "../_constants/participants";
 import { Separator } from "./ui/separator";
+import { cn } from "../_lib/utils";
+import { isLegendPlayer } from "../_helpers/is-legend-players";
 
 const Navbar = () => {
   const router = useRouter();
@@ -111,19 +113,47 @@ const Navbar = () => {
                 <Separator />
               </div>
 
-              <div className="space-y-3 pb-4">
-                {orderedParticipants.map((participant) => (
-                  <SheetClose asChild key={participant.slug}>
-                    <Link
-                      href={`/team/${participant.slug}`}
-                      className="flex gap-2 text-sm w-full border border-[#26272B] hover:bg-[#26272B] transition-all justify-start py-2 px-4 rounded-xl items-center shadow-sm"
-                    >
+        <div className="space-y-3 pb-4">
+          {orderedParticipants.map((participant) => {
+            const isLegend = isLegendPlayer(participant.name)
+
+            return (
+              <SheetClose asChild key={participant.slug}>
+                <Link
+                  href={`/team/${participant.slug}`}
+                  className={cn(
+                    "flex gap-2 text-sm w-full transition-all justify-start py-2 px-4 rounded-xl items-center shadow-sm",
+                    isLegend
+                      ? "legendary-card"
+                      : "border border-[#26272B] hover:bg-[#26272B]"
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "flex gap-2 items-center w-full rounded-xl",
+                      isLegend && "legendary-card-content"
+                    )}
+                  >
+                    {isLegend ? (
+                      <Crown size={16} className="text-yellow-400" />
+                    ) : (
                       <Flag size={16} />
-                      <span className="font-semibold">{participant.name}</span>
-                    </Link>
-                  </SheetClose>
-                ))}
-              </div>
+                    )}
+
+                    <span
+                      className={cn(
+                        "font-semibold",
+                        isLegend && "legendary-name"
+                      )}
+                    >
+                      {participant.name}
+                    </span>
+                  </div>
+                </Link>
+              </SheetClose>
+            )
+          })}
+        </div>
             </div>
           </SheetHeader>
         </SheetContent>

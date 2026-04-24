@@ -48,14 +48,19 @@ export const PlayerRow = ({ player }: { player: Players }) => {
     startTransition(async () => {
       try {
         await editPlayer(formData);
-        toast.success(`Jogador atualizado para ${formData.get("owner-name")}`, {
+        toast.success(`Jogador transferido para ${formData.get("owner-name")}`, {
           duration: 5000,
           position: "bottom-center",
+          className: '!bg-emerald-600 !border-none !text-white'
         });
         setOpen(false);
       } catch (err) {
         console.error(err);
-        toast.error("Erro ao atualizar o jogador");
+        toast.error("Erro ao atualizar o jogador", {
+          duration: 5000,
+          position: "bottom-center",
+          className: '!bg-red-600 !border-none !text-white'
+        });
       }
     });
   }
@@ -86,7 +91,7 @@ export const PlayerRow = ({ player }: { player: Players }) => {
                 {player.name}
               </span>
               <p className="my-3 font-light text-[1rem]">
-                Dono atual: {player.playerOwner}
+                Dono atual: <span className="font-semibold uppercase text-blue-500">{player.playerOwner}</span>
               </p>
             </DialogTitle>
             <DialogDescription></DialogDescription>
@@ -98,8 +103,8 @@ export const PlayerRow = ({ player }: { player: Players }) => {
               handleSubmit(new FormData(e.currentTarget));
             }}
           >
-            <div className="space-y-8">
-              <div>
+            <div>
+              <div className="hidden">
                 <span>ID:</span>
                 <Input name="id" value={player.id} readOnly />
               </div>
@@ -147,7 +152,7 @@ export const PlayerRow = ({ player }: { player: Players }) => {
 
             <DialogFooter className="mt-6">
               <Button type="submit" disabled={isPending}>
-                {isPending ? "Salvando..." : "SALVAR"}
+                {isPending ? "Transferindo..." : "Transferir"}
               </Button>
             </DialogFooter>
           </form>

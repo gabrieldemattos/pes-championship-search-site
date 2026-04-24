@@ -1,0 +1,1 @@
+export const legendsPlayers = ["lalo", "pires"]

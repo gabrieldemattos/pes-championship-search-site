@@ -11,6 +11,8 @@ import LineupBuilder from "./_components/lineup-builder";
 import { Button } from "@/app/_components/ui/button";
 import CompareModal from "./_components/compare-modal";
 import { State } from "@/app/_types/State";
+import { cn } from "@/app/_lib/utils";
+import { isLegendPlayer } from "@/app/_helpers/is-legend-players";
 
 const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
   const [playersList, setPlayersList] = useState<Players[]>([]);
@@ -72,7 +74,7 @@ const TeamPage = ({ params }: { params: Promise<{ owner: string }> }) => {
         <>
           <h1 className="text-center text-lg mt-7 sm:text-xl">
             Você está visualizando o time de{" "}
-            <span className="font-bold">{playersList[0].playerOwner}</span>
+            <span className={cn("font-bold", isLegendPlayer(playersList[0].playerOwner) ? "legendary-gold" : "")}>{playersList[0].playerOwner}</span>
           </h1>
 
           <div

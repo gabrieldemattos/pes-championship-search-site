@@ -4,6 +4,172 @@
 @tailwind components;
 @tailwind utilities;
 
+.legendary-gold {
+  position: relative;
+  display: inline-block;
+  font-weight: 700;
+  color: #fde047; /* amarelo dourado */
+  text-shadow:
+    0 0 4px rgba(255, 215, 0, 0.9),
+    0 0 8px rgba(255, 215, 0, 0.8),
+    0 0 14px rgba(255, 215, 0, 0.7),
+    0 0 22px rgba(255, 215, 0, 0.6);
+  animation: legendaryGlow 1.8s ease-in-out infinite alternate;
+}
+
+.legendary-gold::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(255,215,0,0.35), transparent 70%);
+  filter: blur(6px);
+  z-index: -1;
+}
+
+@keyframes legendaryGlow {
+  from {
+    transform: scale(1);
+    text-shadow:
+      0 0 4px rgba(255, 215, 0, 0.8),
+      0 0 8px rgba(255, 215, 0, 0.7),
+      0 0 14px rgba(255, 215, 0, 0.6);
+  }
+
+  to {
+    transform: scale(1.03);
+    text-shadow:
+      0 0 6px rgba(255, 215, 0, 1),
+      0 0 12px rgba(255, 215, 0, 0.95),
+      0 0 20px rgba(255, 215, 0, 0.85),
+      0 0 30px rgba(255, 215, 0, 0.75);
+  }
+}
+
+.legendary-name {
+  position: relative;
+  display: inline-block;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  background: linear-gradient(
+    180deg,
+    #fffef2 0%,
+    #fff4b8 20%,
+    #ffd95c 45%,
+    #f6b800 60%,
+    #ffe89a 80%,
+    #fffef2 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow:
+    0 1px 0 #a56a00,
+    0 2px 0 #7a4d00,
+    0 0 10px rgba(255, 215, 0, 0.35),
+    0 0 20px rgba(255, 200, 0, 0.18);
+
+  animation: legendaryPulse 2.2s ease-in-out infinite;
+}
+
+/* brilho passando */
+.legendary-name::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  transform: skewX(-20deg);
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,0.65),
+    transparent
+  );
+
+  animation: shineMove 3s infinite;
+}
+
+@keyframes shineMove {
+  0% { left: -60%; }
+  100% { left: 130%; }
+}
+
+@keyframes legendaryPulse {
+  0%,100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+
+  50% {
+    transform: scale(1.03);
+    filter: brightness(1.08);
+  }
+}
+
+.legendary-card {
+  position: relative;
+  display: inline-block;
+  padding: 2px; /* espessura da borda */
+  border-radius: 18px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* borda dourada girando */
+.legendary-card::before {
+  content: "";
+  position: absolute;
+  inset: -120%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 40deg,
+    #fff7bf 70deg,
+    #ffd54f 95deg,
+    #ffb300 120deg,
+    #fff1a8 145deg,
+    transparent 180deg,
+    transparent 360deg
+  );
+
+  animation: rotateGold 3s linear infinite;
+  z-index: 0;
+}
+
+/* fundo interno */
+.legendary-card::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #111214; /* fundo dark */
+  border-radius: 16px;
+  z-index: 1;
+}
+
+/* conteúdo fica acima */
+.legendary-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 10px 24px;
+}
+
+@keyframes rotateGold {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

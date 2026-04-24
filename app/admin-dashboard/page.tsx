@@ -27,7 +27,6 @@ const AdminDashboard = () => {
       } else {
         alert("Senha incorreta.");
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       alert("Erro ao validar acesso. Tente novamente.");
     }
@@ -47,7 +46,7 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="text-center text-xl mt-10">
+    <div className="text-center text-xl mt-10 md:px-20 xl:px-40 2xl:px-[500px]">
       Bem-vindo à Admin Dashboard!
       <div className="flex items-center justify-center w-full mt-10">
         <Form />
