@@ -1,112 +1,100 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { champions } from "./_actions/champions";
+import { useEffect, useMemo, useState } from "react";
+import { Trophy } from "lucide-react";
 import { Champion } from "@prisma/client";
-import { useEffect, useState } from "react";
+
+import { champions } from "./_actions/champions";
+import ChampionsList from "./_components/champions-list";
+
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../_components/ui/tabs";
+import { State } from "../_types/State";
 import Loader from "../_components/loader";
+import ErrorMessage from "../_components/error-message";
 
 export default function ChampionsPage() {
-  const [allChampions, setAllChampions] = useState<Champion[] | null>(null);
-
-  const fetchChampions = async () => {
-    const fetchChampions = await champions();
-    setAllChampions(fetchChampions.reverse());
-  };
+  const [allChampions, setAllChampions] = useState<Champion[]>([]);
+  const [state, setState] = useState<State>("idle");
 
   useEffect(() => {
+    const fetchChampions = async () => {
+      try {
+        setState("loading");
+        const data = await champions();
+
+        setAllChampions([...data].reverse());
+        setState("success");
+      } catch {
+        setState("error");
+      }
+    };
+
     fetchChampions();
   }, []);
 
-  console.log(allChampions);
+  const { principal, copinha } = useMemo(() => {
+    return {
+      principal: allChampions.filter(
+        (champion) => champion.category === "Principal",
+      ),
+      copinha: allChampions.filter(
+        (champion) => champion.category === "Copinha",
+      ),
+    };
+  }, [allChampions]);
 
   return (
-    <main className="min-h-screen bg-gray-900 text-white p-8">
-      <h1 className="text-2xl lg:text-4xl font-bold mb-8 text-center text-blue-400">
-        🏆 Últimos Campeões
-      </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {allChampions ? (
-          allChampions.map((champion) => (
-            <motion.div
-              key={champion.id}
-              className="bg-gray-800 p-6 rounded-2xl shadow-lg border border-gray-700 hover:shadow-2xl transition-shadow"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <div className="flex justify-between items-center mb-1">
-                <h2 className="text-2xl font-bold text-white">
-                  {champion.playerOwner}
-                </h2>
-              </div>
-              <p className="text-gray-400 mb-4">{champion.season}</p>
+    <main className="min-h-screen px-4 py-12 md:px-8">
+      {state === "loading" && <Loader />}
+      {state === "error" && (
+        <ErrorMessage error="Ocorreu um erro ao carregar os campeões. Tente novamente mais tarde." />
+      )}
 
-              <div className="text-white rounded-lg py-5">
-                <h2 className="text-lg font-bold text-yellow-400">
-                  Resultado da Final:
-                </h2>
-                <p className="text-lg font-extrabold w-52">
-                  {champion.finalScore}
-                </p>
-              </div>
+      {state === "success" && (
+        <div className="mx-auto flex max-w-6xl flex-col gap-10">
+          <header className="flex items-center justify-center gap-3">
+            <Trophy className="size-9 text-amber-400" aria-hidden="true" />
 
-              <div className="flex items-center gap-4">
-                <Image
-                  src={champion.highlightPlayerImage}
-                  alt={`Jogador destaque: ${champion.highlightPlayerImage}`}
-                  width={80}
-                  height={80}
-                  className="rounded-full"
-                />
-                <div>
-                  <h3 className="text-lg font-semibold text-yellow-400">
-                    Jogador Destaque:
-                  </h3>
-                  <p className="text-xl font-bold">
-                    {champion.highlightPlayerSlug}
-                  </p>
-                </div>
-              </div>
+            <h1 className="text-3xl font-bold tracking-tight text-blue-500">
+              Últimos Campeões
+            </h1>
+          </header>
 
-              <div className="mt-6">
-                <h4 className="text-lg font-semibold text-blue-400">
-                  Time Campeão:
-                </h4>
-                <motion.ul
-                  className="grid grid-cols-2 gap-3 mt-3 text-sm"
-                  initial="hidden"
-                  animate="visible"
-                  variants={{
-                    hidden: { opacity: 0 },
-                    visible: {
-                      opacity: 1,
-                      transition: { staggerChildren: 0.05 },
-                    },
-                  }}
-                >
-                  {champion.teamPlayersSlugs.map((player) => (
-                    <motion.li
-                      key={player}
-                      className="bg-gray-700 p-2 rounded-md hover:bg-blue-600 transition-colors"
-                      variants={{
-                        hidden: { opacity: 0, y: 10 },
-                        visible: { opacity: 1, y: 0 },
-                      }}
-                    >
-                      {player}
-                    </motion.li>
-                  ))}
-                </motion.ul>
-              </div>
-            </motion.div>
-          ))
-        ) : (
-          <Loader />
-        )}
-      </div>
+          <Tabs
+            defaultValue="principal"
+            className="w-full flex flex-col items-center gap-2"
+          >
+            <TabsList className="h-11 bg-slate-800">
+              <TabsTrigger
+                value="principal"
+                className="px-6 text-base text-slate-300 data-[state=active]:bg-blue-500 data-[state=active]:text-white"
+              >
+                Principal
+              </TabsTrigger>
+
+              <TabsTrigger
+                value="copinha"
+                className="px-6 text-base text-slate-300 data-[state=active]:bg-blue-500 data-[state=active]:text-white"
+              >
+                Copinha
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="principal" className="w-full">
+              <ChampionsList champions={principal} />
+            </TabsContent>
+
+            <TabsContent value="copinha" className="w-full">
+              <ChampionsList champions={copinha} />
+            </TabsContent>
+          </Tabs>
+        </div>
+      )}
     </main>
   );
 }
