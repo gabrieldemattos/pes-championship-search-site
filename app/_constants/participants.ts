@@ -11,6 +11,6 @@ export const participants = [
   { name: "Juninho", slug: "juninho" },
   { name: "Xande", slug: "xande" },
   { name: "Lalo", slug: "lalo" },
-  { name: "Kléber", slug: "kleber" },
+  { name: "Neto", slug: "neto" },
   { name: "Lucas", slug: "lucas" },
 ];
