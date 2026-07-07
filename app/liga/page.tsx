@@ -9,7 +9,7 @@ const LigaPage = () => {
   return (
     <div className="flex flex-col" style={{ height: "calc(100vh - 56px)" }}>
       <iframe
-        src="https://copafacil.com/-1pzjn"
+        src="https://copafacil.com/-qbd62"
         className="w-full flex-1 border-0"
         title="Liga - Arena PES 2008"
         allow="fullscreen"
